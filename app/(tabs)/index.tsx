@@ -17,7 +17,7 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }>
-      <ThemedText type='title'>Welcome to your new app</ThemedText>
+      <ThemedText type='title'>Welcome to your New app</ThemedText>
     </ParallaxScrollView>
   );
 }
