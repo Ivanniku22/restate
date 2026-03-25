@@ -36,7 +36,7 @@ const TabsLayout = () => {
         }}
     >
 
-        // Home Tab
+        {/* // Home Tab */}
       <Tabs.Screen 
         name="index"
         options={{
@@ -52,7 +52,7 @@ const TabsLayout = () => {
         }}
       />
 
-        // Explore Tab
+        {/* Explore Tab */}
       <Tabs.Screen 
         name="explore"
         options={{
@@ -68,7 +68,7 @@ const TabsLayout = () => {
         }}
       />
 
-        // Profile Tab
+        {/* Profile Tab */}
         <Tabs.Screen 
         name="profile"
         options={{
