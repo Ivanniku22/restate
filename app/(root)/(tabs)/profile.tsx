@@ -13,6 +13,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import images from "@/constants/images";
 
 interface SettingsItemProps {
   icon: ImageSourcePropType;
@@ -46,6 +47,7 @@ const SettingsItem = ({
 
 const Profile = () => {
   const { user, refetch } = useGlobalContext();
+  
 
   const handleLogout = async () => {
     const result = await logout();
@@ -67,13 +69,13 @@ const Profile = () => {
         {/* Header */}
         <View className="flex flex-row items-center justify-between mt-5">
           <Text className="text-xl font-rubikBold">Profile</Text>
-          <Image source={icons.bell} className="size-6" />
+          <Image source={icons.bell} className="size-8" />
         </View>
 
         <View className="flex-row justify-center flex mt-5">
           <View className="flex flex-col items-center relative mt-5">
             <Image
-              source={{ uri: user?.avatar }}
+              source={images.avatar}
               className="size-44 relative rounded-full"
             />
             <TouchableOpacity className="absolute bottom-12 right-2">
