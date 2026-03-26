@@ -1,19 +1,19 @@
 import { settings } from "@/constants/data";
 import icons from "@/constants/icons";
+import images from "@/constants/images";
 import { logout } from "@/lib/appwrite";
 import { useGlobalContext } from "@/lib/global-provider";
 import React from "react";
 import {
-  Alert,
-  Image,
-  ImageSourcePropType,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
+    Alert,
+    Image,
+    ImageSourcePropType,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import images from "@/constants/images";
 
 interface SettingsItemProps {
   icon: ImageSourcePropType;
@@ -46,8 +46,7 @@ const SettingsItem = ({
 );
 
 const Profile = () => {
-  const { user, refetch } = useGlobalContext();
-  
+  const { user, refetch, loading } = useGlobalContext();
 
   const handleLogout = async () => {
     const result = await logout();
@@ -75,14 +74,26 @@ const Profile = () => {
         <View className="flex-row justify-center flex mt-5">
           <View className="flex flex-col items-center relative mt-5">
             <Image
-              source={images.avatar}
+              source={
+                loading
+                  ? images.avatar
+                  : user?.avatar
+                    ? { uri: user.avatar }
+                    : images.avatar
+              }
               className="size-44 relative rounded-full"
+              onError={() => {
+                // Fallback to default avatar if image fails to load
+                console.log("Avatar failed to load, using default");
+              }}
             />
             <TouchableOpacity className="absolute bottom-12 right-2">
               <Image source={icons.edit} className="size-9" />
             </TouchableOpacity>
 
-            <Text className="text-2xl font-rubikBold mt-2">{user?.name}</Text>
+            <Text className="text-2xl font-rubikBold mt-2">
+              {loading ? "Loading..." : user?.name || "User"}
+            </Text>
           </View>
         </View>
 

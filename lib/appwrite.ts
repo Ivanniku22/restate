@@ -1,6 +1,6 @@
-import { Account, Avatars, Client, OAuthProvider } from "react-native-appwrite";
 import * as Linking from "expo-linking";
 import * as WebBrowser from "expo-web-browser";
+import { Account, Avatars, Client, OAuthProvider } from "react-native-appwrite";
 
 export const config = {
   platform: "com.jsm.restate",
@@ -69,14 +69,19 @@ export async function getCurrentUser() {
     const response = await account.get();
 
     if (response.$id) {
-      const userAvatar = avatar.getInitials(response.name);
+      // For React Native, we'll use a simple approach for avatars
+      // You can replace this with a proper avatar service later
+      const userAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(response.name)}&background=random&color=fff&size=128`;
+
       return {
         ...response,
-        avatar: userAvatar.toString(),
+        avatar: userAvatar,
       };
     }
+
+    return null;
   } catch (error) {
-    console.error(error);
+    console.error("Error getting current user:", error);
     return null;
   }
 }
