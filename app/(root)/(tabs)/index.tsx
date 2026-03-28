@@ -1,21 +1,25 @@
+
 import { Card, FeaturedCard } from "@/components/Cards";
 import Filters from "@/components/Filters";
 import Search from "@/components/Search";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { useGlobalContext } from "@/lib/global-provider";
+import { router } from "expo-router";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const { user, loading } = useGlobalContext();
 
+   const handleCardPress = (id: string) => router.push(`/properties/${id}`);
+
   return (
     <SafeAreaView className="bg-white h-full">
       <FlatList
         className="flex-1"
         data={[1, 2, 3, 4]}
-        renderItem={({ item }) => <Card />}
+        renderItem={({ item }) => <Card  onPress={() => handleCardPress('1')}/>}
         keyExtractor={(item) => item.toString()}
         numColumns={2}
         contentContainerClassName="pb-32"
@@ -66,7 +70,7 @@ export default function Index() {
 
               <FlatList
                 data={[1, 2, 3]}
-                renderItem={({ item }) => <FeaturedCard />}
+                renderItem={({ item }) => <FeaturedCard onPress={() => handleCardPress("1")}/>}
                 keyExtractor={(item) => item.toString()}
                 horizontal
                 showsHorizontalScrollIndicator={false}
